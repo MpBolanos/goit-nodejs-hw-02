@@ -40,7 +40,7 @@ const addContact = async (body) => {
 
 const updateContact = async (contactId, body) => {
   const contacts = await listContacts();
-  const index = contacts.findIndex((c) => c.id === contactId.toString());
+  const index = contacts.findIndex((c) => c.id === contactId);
 
   if (index === -1) {
     return Promise.reject();
