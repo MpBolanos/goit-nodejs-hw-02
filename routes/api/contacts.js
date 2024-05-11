@@ -57,9 +57,14 @@ router.put("/:contactId", async (req, res, next) => {
       return;
     }
     const result = await hendler.updateContact(req.params.contactId, req.body);
-    res.json(result);
+    if (!result) {
+      res.status(404).json({ message: "Contact not found" });
+      return;
+    }
+    res.json({ message: "Contact updated successfully", contact: result });
   } catch (err) {
-    res.status(404).json({ message: "Not found" });
+    console.error(err);
+    res.status(500).json({ message: "Internal Server Error" });
   }
 });
 
